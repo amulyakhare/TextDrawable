@@ -1,0 +1,4 @@
+include ':sample'
+
+include 'library'
+project(':library').projectDir = new File('library')

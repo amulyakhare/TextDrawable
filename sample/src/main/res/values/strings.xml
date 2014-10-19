@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TextDrawable Sample</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_list">TextDrawable Sample</string>
+    <string name="title_activity_check_box">TextDrawable Sample</string>
+
+</resources>
