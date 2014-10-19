@@ -1,9 +1,16 @@
 ###TextDrawable 
 This light-weight library provides images with letter/text like the Gmail app. It extends the `Drawable` class thus can be used with existing/custom/network `ImageView` classes. Also included is a fluid interface for creating drawables and a customizable `ColorGenerator`.
 
+<p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen1.png"/>
+<img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen2.png"/>
+</p>
+
 ###How to use
 
 ####1. Create simple tile:
+
+<p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen3.png"/>
+</p>
 
 ```xml
 <ImageView android:layout_width="60dp"
@@ -21,6 +28,9 @@ image.setImageDrawable(drawable);
 
 ####2. Create rounded corner or circular tiles:
 
+<p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen4.png"/>
+</p>
+
 ```java
 TextDrawable drawable1 = TextDrawable.builder()
                 .buildRoundRect("A", Color.RED, 10); // radius in px
@@ -30,6 +40,9 @@ TextDrawable drawable2 = TextDrawable.builder()
 ```
 
 ####3. Add border:
+
+<p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen5.png"/>
+</p>
 
 ```java
 TextDrawable drawable = TextDrawable.builder()
