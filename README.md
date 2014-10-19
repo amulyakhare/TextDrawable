@@ -28,7 +28,7 @@ image.setImageDrawable(drawable);
 
 ####2. Create rounded corner or circular tiles:
 
-<p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen4.png"/>
+<p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen6.png"/>
 </p>
 
 ```java
