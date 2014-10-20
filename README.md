@@ -1,5 +1,5 @@
 ###TextDrawable 
-This light-weight library provides images with letter/text like the Gmail app. It extends the `Drawable` class thus can be used with existing/custom/network `ImageView` classes. Also included is a fluid interface for creating drawables and a customizable `ColorGenerator`.
+This light-weight library provides images with letter/text like the Gmail app. It extends the `Drawable` class thus can be used with existing/custom/network `ImageView` classes. Also included is a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) for creating drawables and a customizable `ColorGenerator`.
 
 <p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen1.png" width="350"/>
 <img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen2.png" width="350"/>
