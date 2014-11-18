@@ -1,11 +1,25 @@
 ###TextDrawable 
 This light-weight library provides images with letter/text like the Gmail app. It extends the `Drawable` class thus can be used with existing/custom/network `ImageView` classes. Also included is a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) for creating drawables and a customizable `ColorGenerator`.
 
-<p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen1.png" width="350"/>
-<img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen2.png" width="350"/>
+<p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen1-material.png" width="350"/>
+<img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen2-material.png" width="350"/>
 </p>
 
 ###How to use
+
+#### Import with Gradle:
+
+```groovy
+repositories{
+    maven {
+        url 'http://dl.bintray.com/amulyakhare/maven'
+    }
+}
+
+dependencies {
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.0'
+}
+```
 
 ####1. Create simple tile:
 
@@ -115,3 +129,5 @@ image.setImageDrawable(drawable);
 2. Compatible with other views (not just `ImageView`). Use it as background drawable, compound drawable for `TextView`, `Button` etc.
 
 3. Use multiple letters or `unicode` characters to create interesting tiles. 
+
+<p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen7.png" width="350"/></p>
