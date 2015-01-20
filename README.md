@@ -17,7 +17,7 @@ repositories{
 }
 
 dependencies {
-    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.0'
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }
 ```
 
@@ -83,7 +83,7 @@ TextDrawable drawable = TextDrawable.builder()
 ####5. Built-in color generator:
 
 ```java
-ColorGenerator generator = ColorGenerator.DEFAULT;
+ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
 // generate random color
 int color1 = generator.getRandomColor();
 // generate color based on a key (same key returns the same color), useful for list/grid views
@@ -124,7 +124,7 @@ image.setImageDrawable(drawable);
 
 ####7. Other features:
 
-1.	Mix-match with other drawables. Use it in conjunction with `LayerDrawable`, `InsetDrawable`, `AnimationDrawable`, `TransitionDrawable` etc.
+1. Mix-match with other drawables. Use it in conjunction with `LayerDrawable`, `InsetDrawable`, `AnimationDrawable`, `TransitionDrawable` etc.
 
 2. Compatible with other views (not just `ImageView`). Use it as background drawable, compound drawable for `TextView`, `Button` etc.
 

@@ -44,7 +44,7 @@ public class ListActivity extends ActionBarActivity {
     );
 
     // declare the color generator and drawable builder
-    private ColorGenerator mColorGenerator = ColorGenerator.DEFAULT;
+    private ColorGenerator mColorGenerator = ColorGenerator.MATERIAL;
     private TextDrawable.IBuilder mDrawableBuilder;
 
     @Override
