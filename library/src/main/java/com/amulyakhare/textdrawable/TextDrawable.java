@@ -51,7 +51,8 @@ public class TextDrawable extends ShapeDrawable {
         // border paint settings
         borderThickness = builder.borderThickness;
         borderPaint = new Paint();
-        borderPaint.setColor(getDarkerShade(color));
+        borderPaint.setColor(builder.borderColor == null ? getDarkerShade(color) : builder.borderColor);
+        borderPaint.setAntiAlias(true);
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(borderThickness);
 
@@ -144,6 +145,8 @@ public class TextDrawable extends ShapeDrawable {
 
         private int borderThickness;
 
+        private Integer borderColor;
+
         private int width;
 
         private int height;
@@ -167,6 +170,7 @@ public class TextDrawable extends ShapeDrawable {
             color = Color.GRAY;
             textColor = Color.WHITE;
             borderThickness = 0;
+            borderColor = null;
             width = -1;
             height = -1;
             shape = new RectShape();
@@ -176,41 +180,55 @@ public class TextDrawable extends ShapeDrawable {
             toUpperCase = false;
         }
 
+        @Override
         public IConfigBuilder width(int width) {
             this.width = width;
             return this;
         }
 
+        @Override
         public IConfigBuilder height(int height) {
             this.height = height;
             return this;
         }
 
+        @Override
         public IConfigBuilder textColor(int color) {
             this.textColor = color;
             return this;
         }
 
+        @Override
         public IConfigBuilder withBorder(int thickness) {
             this.borderThickness = thickness;
             return this;
         }
 
+        @Override
+        public IConfigBuilder withBorderColor(int color) {
+            this.borderColor = color;
+            return this;
+        }
+
+        @Override
         public IConfigBuilder useFont(Typeface font) {
             this.font = font;
             return this;
         }
 
+        @Override
         public IConfigBuilder fontSize(int size) {
             this.fontSize = size;
             return this;
         }
 
+        @Override
         public IConfigBuilder bold() {
             this.isBold = true;
             return this;
         }
 
+        @Override
         public IConfigBuilder toUpperCase() {
             this.toUpperCase = true;
             return this;
@@ -280,6 +298,8 @@ public class TextDrawable extends ShapeDrawable {
         public IConfigBuilder textColor(int color);
 
         public IConfigBuilder withBorder(int thickness);
+
+        public IConfigBuilder withBorderColor(int color);
 
         public IConfigBuilder useFont(Typeface font);
 
