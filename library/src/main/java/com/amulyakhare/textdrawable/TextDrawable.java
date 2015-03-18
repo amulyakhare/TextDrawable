@@ -1,6 +1,8 @@
 package com.amulyakhare.textdrawable;
 
 import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
@@ -23,6 +25,7 @@ public class TextDrawable extends ShapeDrawable {
     private final int fontSize;
     private final float radius;
     private final int borderThickness;
+    private Bitmap bitmap;
 
     private TextDrawable(Builder builder) {
         super(builder.shape);
@@ -59,6 +62,11 @@ public class TextDrawable extends ShapeDrawable {
         Paint paint = getPaint();
         paint.setColor(color);
 
+        //custom centre drawable
+        if(builder.drawable != null) {
+            bitmap = ((BitmapDrawable)builder.drawable).getBitmap();
+        }
+
     }
 
     private int getDarkerShade(int color) {
@@ -79,15 +87,21 @@ public class TextDrawable extends ShapeDrawable {
         }
 
         int count = canvas.save();
-        canvas.translate(r.left, r.top);
+        if (bitmap == null) {
+            canvas.translate(r.left, r.top);
+        }
 
         // draw text
         int width = this.width < 0 ? r.width() : this.width;
         int height = this.height < 0 ? r.height() : this.height;
         int fontSize = this.fontSize < 0 ? (Math.min(width, height) / 2) : this.fontSize;
-        textPaint.setTextSize(fontSize);
-        canvas.drawText(text, width / 2, height / 2 - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
 
+        if (bitmap == null) {
+            textPaint.setTextSize(fontSize);
+            canvas.drawText(text, width / 2, height / 2 - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
+        } else {
+            canvas.drawBitmap(bitmap, (width - bitmap.getWidth()) / 2, (height - bitmap.getHeight()) / 2, null);
+        }
         canvas.restoreToCount(count);
 
     }
@@ -161,6 +175,8 @@ public class TextDrawable extends ShapeDrawable {
         private boolean toUpperCase;
 
         public float radius;
+
+        public Drawable drawable;
 
         private Builder() {
             text = "";
@@ -253,9 +269,21 @@ public class TextDrawable extends ShapeDrawable {
         }
 
         @Override
+        public TextDrawable buildRect(Drawable drawable, int color) {
+            rect();
+            return build(drawable, color);
+        }
+
+        @Override
         public TextDrawable buildRoundRect(String text, int color, int radius) {
             roundRect(radius);
             return build(text, color);
+        }
+
+        @Override
+        public TextDrawable buildRoundRect(Drawable drawable, int color, int radius) {
+            roundRect(radius);
+            return build(drawable, color);
         }
 
         @Override
@@ -265,9 +293,22 @@ public class TextDrawable extends ShapeDrawable {
         }
 
         @Override
+        public TextDrawable buildRound(Drawable drawable, int color) {
+            round();
+            return build(drawable, color);
+        }
+
+        @Override
         public TextDrawable build(String text, int color) {
             this.color = color;
             this.text = text;
+            return new TextDrawable(this);
+        }
+
+        @Override
+        public TextDrawable build(Drawable drawable, int color) {
+            this.drawable = drawable;
+            this.color = color;
             return new TextDrawable(this);
         }
     }
@@ -295,6 +336,8 @@ public class TextDrawable extends ShapeDrawable {
     public static interface IBuilder {
 
         public TextDrawable build(String text, int color);
+
+        public TextDrawable build(Drawable drawable, int color);
     }
 
     public static interface IShapeBuilder {
@@ -309,8 +352,14 @@ public class TextDrawable extends ShapeDrawable {
 
         public TextDrawable buildRect(String text, int color);
 
+        public TextDrawable buildRect(Drawable drawable, int color);
+
         public TextDrawable buildRoundRect(String text, int color, int radius);
 
+        public TextDrawable buildRoundRect(Drawable drawable, int color, int radius);
+
         public TextDrawable buildRound(String text, int color);
+
+        public TextDrawable buildRound(Drawable drawable, int color);
     }
 }
