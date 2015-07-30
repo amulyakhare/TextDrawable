@@ -1,6 +1,6 @@
 package com.amulyakhare.textdrawable;
 
-import android.graphics.*;
+import android.graphics.Color;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
@@ -15,14 +15,15 @@ public class TextDrawable extends ShapeDrawable {
     private final Paint textPaint;
     private final Paint borderPaint;
     private static final float SHADE_FACTOR = 0.9f;
-    private final String text;
-    private final int color;
+    private final String    text;
+    private final int       color;
     private final RectShape shape;
-    private final int height;
-    private final int width;
-    private final int fontSize;
-    private final float radius;
-    private final int borderThickness;
+    private final int       height;
+    private final int       width;
+    private final int       fontSize;
+    private final float     radius;
+    private final int       borderThickness;
+    private final int       bgColor;
 
     private TextDrawable(Builder builder) {
         super(builder.shape);
@@ -36,10 +37,11 @@ public class TextDrawable extends ShapeDrawable {
         // text and color
         text = builder.toUpperCase ? builder.text.toUpperCase() : builder.text;
         color = builder.color;
+        bgColor = builder.backgroundColor;
 
         // text paint settings
         fontSize = builder.fontSize;
-        textPaint = new Paint();
+        textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(builder.textColor);
         textPaint.setAntiAlias(true);
         textPaint.setFakeBoldText(builder.isBold);
@@ -50,21 +52,21 @@ public class TextDrawable extends ShapeDrawable {
 
         // border paint settings
         borderThickness = builder.borderThickness;
-        borderPaint = new Paint();
-        borderPaint.setColor(getDarkerShade(color));
+        borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        borderPaint.setColor(color);
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(borderThickness);
 
         // drawable paint color
         Paint paint = getPaint();
-        paint.setColor(color);
+        paint.setColor(builder.backgroundColor);
 
     }
 
     private int getDarkerShade(int color) {
-        return Color.rgb((int)(SHADE_FACTOR * Color.red(color)),
-                (int)(SHADE_FACTOR * Color.green(color)),
-                (int)(SHADE_FACTOR * Color.blue(color)));
+        return Color.rgb((int) (SHADE_FACTOR * Color.red(color)),
+                (int) (SHADE_FACTOR * Color.green(color)),
+                (int) (SHADE_FACTOR * Color.blue(color)));
     }
 
     @Override
@@ -93,16 +95,17 @@ public class TextDrawable extends ShapeDrawable {
     }
 
     private void drawBorder(Canvas canvas) {
+        //for new device density 1dp=3px,so half of 1dp will get 1px,
+        //this will get 2px inset
         RectF rect = new RectF(getBounds());
-        rect.inset(borderThickness/2, borderThickness/2);
+        double inset = Math.ceil(borderThickness / 2);
+        rect.inset((int) inset, (int) inset);
 
         if (shape instanceof OvalShape) {
             canvas.drawOval(rect, borderPaint);
-        }
-        else if (shape instanceof RoundRectShape) {
+        } else if (shape instanceof RoundRectShape) {
             canvas.drawRoundRect(rect, radius, radius, borderPaint);
-        }
-        else {
+        } else {
             canvas.drawRect(rect, borderPaint);
         }
     }
@@ -142,6 +145,8 @@ public class TextDrawable extends ShapeDrawable {
 
         private int color;
 
+        private int backgroundColor;
+
         private int borderThickness;
 
         private int width;
@@ -163,6 +168,7 @@ public class TextDrawable extends ShapeDrawable {
         public float radius;
 
         private Builder() {
+            backgroundColor= Color.TRANSPARENT;
             text = "";
             color = Color.GRAY;
             textColor = Color.WHITE;
@@ -174,6 +180,11 @@ public class TextDrawable extends ShapeDrawable {
             fontSize = -1;
             isBold = false;
             toUpperCase = false;
+        }
+
+        public IConfigBuilder bgColor(int color) {
+            this.backgroundColor = color;
+            return this;
         }
 
         public IConfigBuilder width(int width) {
