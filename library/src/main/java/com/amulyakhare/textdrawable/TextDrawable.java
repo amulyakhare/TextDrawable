@@ -21,16 +21,28 @@ import android.graphics.drawable.shapes.RoundRectShape;
 public class TextDrawable extends ShapeDrawable {
 
     private final Paint textPaint;
+
     private final Paint borderPaint;
+
     private static final float SHADE_FACTOR = 0.9f;
+
     private final String text;
+
     private final int color;
+
     private final RectShape shape;
+
     private final int height;
+
     private final int width;
+
     private final int fontSize;
+
     private final float radius;
+
     private final int borderThickness;
+
+    private Bitmap bitmap;
 
     private TextDrawable(Builder builder) {
         super(builder.shape);
@@ -67,6 +79,7 @@ public class TextDrawable extends ShapeDrawable {
         Paint paint = getPaint();
         paint.setColor(color);
 
+        this.bitmap = builder.bitmap;
     }
 
     private int getDarkerShade(int color) {
@@ -87,15 +100,21 @@ public class TextDrawable extends ShapeDrawable {
         }
 
         int count = canvas.save();
-        canvas.translate(r.left, r.top);
+        if (bitmap == null) {
+            canvas.translate(r.left, r.top);
+        }
 
         // draw text
         int width = this.width < 0 ? r.width() : this.width;
         int height = this.height < 0 ? r.height() : this.height;
         int fontSize = this.fontSize < 0 ? (Math.min(width, height) / 2) : this.fontSize;
-        textPaint.setTextSize(fontSize);
-        canvas.drawText(text, width / 2, height / 2 - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
 
+        if (bitmap == null) {
+            textPaint.setTextSize(fontSize);
+            canvas.drawText(text, width / 2, height / 2 - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
+        } else {
+            canvas.drawBitmap(bitmap, (width - bitmap.getWidth()) / 2, (height - bitmap.getHeight()) / 2, null);
+        }
         canvas.restoreToCount(count);
 
     }
@@ -180,6 +199,8 @@ public class TextDrawable extends ShapeDrawable {
         private boolean toUpperCase;
 
         public float radius;
+
+        public Bitmap bitmap;
 
         private Builder() {
             text = "";
@@ -272,9 +293,21 @@ public class TextDrawable extends ShapeDrawable {
         }
 
         @Override
+        public TextDrawable buildRect(Bitmap bitmap, int color) {
+            rect();
+            return build(bitmap, color);
+        }
+
+        @Override
         public TextDrawable buildRoundRect(String text, int color, int radius) {
             roundRect(radius);
             return build(text, color);
+        }
+
+        @Override
+        public TextDrawable buildRoundRect(Bitmap bitmap, int color, int radius) {
+            roundRect(radius);
+            return build(bitmap, color);
         }
 
         @Override
@@ -284,52 +317,73 @@ public class TextDrawable extends ShapeDrawable {
         }
 
         @Override
+        public TextDrawable buildRound(Bitmap bitmap, int color) {
+            round();
+            return build(bitmap, color);
+        }
+
+        @Override
         public TextDrawable build(String text, int color) {
             this.color = color;
             this.text = text;
             return new TextDrawable(this);
         }
+
+        @Override
+        public TextDrawable build(Bitmap bitmap, int color) {
+            this.bitmap = bitmap;
+            this.color = color;
+            return new TextDrawable(this);
+        }
     }
 
     public interface IConfigBuilder {
-        public IConfigBuilder width(int width);
+        IConfigBuilder width(int width);
 
-        public IConfigBuilder height(int height);
+        IConfigBuilder height(int height);
 
-        public IConfigBuilder textColor(int color);
+        IConfigBuilder textColor(int color);
 
-        public IConfigBuilder withBorder(int thickness);
+        IConfigBuilder withBorder(int thickness);
 
-        public IConfigBuilder useFont(Typeface font);
+        IConfigBuilder useFont(Typeface font);
 
-        public IConfigBuilder fontSize(int size);
+        IConfigBuilder fontSize(int size);
 
-        public IConfigBuilder bold();
+        IConfigBuilder bold();
 
-        public IConfigBuilder toUpperCase();
+        IConfigBuilder toUpperCase();
 
-        public IShapeBuilder endConfig();
+        IShapeBuilder endConfig();
     }
 
-    public static interface IBuilder {
+    public interface IBuilder {
 
-        public TextDrawable build(String text, int color);
+        TextDrawable build(String text, int color);
+
+        TextDrawable build(Bitmap bitmap, int color);
     }
 
-    public static interface IShapeBuilder {
+    public interface IShapeBuilder {
 
-        public IConfigBuilder beginConfig();
+        IConfigBuilder beginConfig();
 
-        public IBuilder rect();
+        IBuilder rect();
 
-        public IBuilder round();
+        IBuilder round();
 
-        public IBuilder roundRect(int radius);
+        IBuilder roundRect(int radius);
 
-        public TextDrawable buildRect(String text, int color);
+        TextDrawable buildRect(String text, int color);
 
-        public TextDrawable buildRoundRect(String text, int color, int radius);
+        TextDrawable buildRect(Bitmap bitmap, int color);
 
-        public TextDrawable buildRound(String text, int color);
+        TextDrawable buildRoundRect(String text, int color, int radius);
+
+        TextDrawable buildRoundRect(Bitmap bitmap, int color, int radius);
+
+        TextDrawable buildRound(String text, int color);
+
+        TextDrawable buildRound(Bitmap bitmap, int color);
     }
 }
