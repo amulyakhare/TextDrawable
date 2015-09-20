@@ -1,6 +1,13 @@
 package com.amulyakhare.textdrawable;
 
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
@@ -64,16 +71,15 @@ public class TextDrawable extends ShapeDrawable {
     }
 
     private int getDarkerShade(int color) {
-        return Color.rgb((int)(SHADE_FACTOR * Color.red(color)),
-                (int)(SHADE_FACTOR * Color.green(color)),
-                (int)(SHADE_FACTOR * Color.blue(color)));
+        return Color.rgb((int) (SHADE_FACTOR * Color.red(color)),
+                (int) (SHADE_FACTOR * Color.green(color)),
+                (int) (SHADE_FACTOR * Color.blue(color)));
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
         Rect r = getBounds();
-
 
         // draw border
         if (borderThickness > 0) {
@@ -96,15 +102,13 @@ public class TextDrawable extends ShapeDrawable {
 
     private void drawBorder(Canvas canvas) {
         RectF rect = new RectF(getBounds());
-        rect.inset(borderThickness/2, borderThickness/2);
+        rect.inset(borderThickness / 2, borderThickness / 2);
 
         if (shape instanceof OvalShape) {
             canvas.drawOval(rect, borderPaint);
-        }
-        else if (shape instanceof RoundRectShape) {
+        } else if (shape instanceof RoundRectShape) {
             canvas.drawRoundRect(rect, radius, radius, borderPaint);
-        }
-        else {
+        } else {
             canvas.drawRect(rect, borderPaint);
         }
     }
@@ -172,7 +176,6 @@ public class TextDrawable extends ShapeDrawable {
             width = -1;
             height = -1;
             shape = new RectShape();
-            font = TypefaceHelper.get("sans-serif-light", Typeface.NORMAL);
             fontSize = -1;
             isBold = false;
             toUpperCase = false;
@@ -268,6 +271,8 @@ public class TextDrawable extends ShapeDrawable {
 
         @Override
         public TextDrawable build(String text, int color) {
+            if (this.font == null)
+                this.font = TypefaceHelper.get("sans-serif-light", Typeface.NORMAL);
             this.color = color;
             this.text = text;
             return new TextDrawable(this);
@@ -275,44 +280,44 @@ public class TextDrawable extends ShapeDrawable {
     }
 
     public interface IConfigBuilder {
-        public IConfigBuilder width(int width);
+        IConfigBuilder width(int width);
 
-        public IConfigBuilder height(int height);
+        IConfigBuilder height(int height);
 
-        public IConfigBuilder textColor(int color);
+        IConfigBuilder textColor(int color);
 
-        public IConfigBuilder withBorder(int thickness);
+        IConfigBuilder withBorder(int thickness);
 
-        public IConfigBuilder useFont(Typeface font);
+        IConfigBuilder useFont(Typeface font);
 
-        public IConfigBuilder fontSize(int size);
+        IConfigBuilder fontSize(int size);
 
-        public IConfigBuilder bold();
+        IConfigBuilder bold();
 
-        public IConfigBuilder toUpperCase();
+        IConfigBuilder toUpperCase();
 
-        public IShapeBuilder endConfig();
+        IShapeBuilder endConfig();
     }
 
-    public static interface IBuilder {
+    public interface IBuilder {
 
-        public TextDrawable build(String text, int color);
+        TextDrawable build(String text, int color);
     }
 
-    public static interface IShapeBuilder {
+    public interface IShapeBuilder {
 
-        public IConfigBuilder beginConfig();
+        IConfigBuilder beginConfig();
 
-        public IBuilder rect();
+        IBuilder rect();
 
-        public IBuilder round();
+        IBuilder round();
 
-        public IBuilder roundRect(int radius);
+        IBuilder roundRect(int radius);
 
-        public TextDrawable buildRect(String text, int color);
+        TextDrawable buildRect(String text, int color);
 
-        public TextDrawable buildRoundRect(String text, int color, int radius);
+        TextDrawable buildRoundRect(String text, int color, int radius);
 
-        public TextDrawable buildRound(String text, int color);
+        TextDrawable buildRound(String text, int color);
     }
 }
