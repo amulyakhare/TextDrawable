@@ -32,8 +32,9 @@ dependencies {
 ```
 **Note:** Specify width/height for the `ImageView` and the `drawable` will auto-scale to fit the size.
 ```java
-TextDrawable drawable = TextDrawable.builder()
-                .buildRect("A", Color.RED);
+TextDrawable drawable = TextDrawable.builder(this)
+    // use buildRect(String, int) for literal color value
+    .buildRectRes("A", R.color.material_red);
 
 ImageView image = (ImageView) findViewById(R.id.image_view);
 image.setImageDrawable(drawable);
@@ -46,10 +47,11 @@ image.setImageDrawable(drawable);
 
 ```java
 TextDrawable drawable1 = TextDrawable.builder()
-                .buildRoundRect("A", Color.RED, 10); // radius in px
+    // use buildRoundRect(String, int, int) for literal color value and pixel size
+    .buildRoundRectRes("A", R.color.material_red, R.dimen.radius_size); 
 
 TextDrawable drawable2 = TextDrawable.builder()
-                .buildRound("A", Color.RED);
+    .buildRound("A", Color.RED);
 ```
 
 ####3. Add border:
@@ -60,7 +62,7 @@ TextDrawable drawable2 = TextDrawable.builder()
 ```java
 TextDrawable drawable = TextDrawable.builder()
                 .beginConfig()
-                    .withBorder(4) /* thickness in px */
+                    .withBorderRes(R.dimen.border_size)  // use withBorder(int) for literal pixel size
                 .endConfig()
                 .buildRoundRect("A", Color.RED, 10);
 ```
@@ -68,11 +70,11 @@ TextDrawable drawable = TextDrawable.builder()
 ####4. Modify font style:
 
 ```java
-TextDrawable drawable = TextDrawable.builder()
+TextDrawable drawable = TextDrawable.builder(this)
                 .beginConfig()
-	                .textColor(Color.BLACK)
+	                .textColorRes(android.R.color.black)  // use textColor(int) for literal color value
                     .useFont(Typeface.DEFAULT)
-                    .fontSize(30) /* size in px */
+                    .fontSizeRes(R.dimen.title_size)  // use fontSize(int) for literal pixel size
                     .bold()
                     .toUpperCase()
                 .endConfig()
@@ -89,9 +91,9 @@ int color1 = generator.getRandomColor();
 int color2 = generator.getColor("user@gmail.com")
 
 // declare the builder object once.
-TextDrawable.IBuilder builder = TextDrawable.builder()
+TextDrawable.IBuilder builder = TextDrawable.builder(this)
 				.beginConfig()
-					.withBorder(4)
+					.withBorderRes(R.dimen.border_size)  // use withBorder(int) for literal values
 				.endConfig()
 				.rect();
 
@@ -105,17 +107,17 @@ TextDrawable ic2 = builder.build("B", color2);
 ```xml
 <ImageView android:layout_width="wrap_content"
 	       android:layout_height="wrap_content"
-	       android:id="@+id/image_view"/>
+	       android:id="@+id/image_view" />
 ```
 **Note:**  The `ImageView` could use `wrap_content` width/height. You could set the width/height of the `drawable` using code.
 
 ```java
-TextDrawable drawable = TextDrawable.builder()
+TextDrawable drawable = TextDrawable.builder(this)
 				.beginConfig()
-					.width(60)  // width in px
-					.height(60) // height in px
+					.widthRes(R.dimen.thumbnail_size)  // use width(int) for literal values
+					.heightRes(R.dimen.thumbnail_size)  // use height(int) for literal values
 				.endConfig()
-                .buildRect("A", Color.RED);
+                .buildRectRes("A", R.color.material_red);  // use buildRect(String, int) for literal color value
 
 ImageView image = (ImageView) findViewById(R.id.image_view);
 image.setImageDrawable(drawable);
