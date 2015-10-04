@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,7 +20,7 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import java.util.Arrays;
 import java.util.List;
 
-public class ListActivity extends ActionBarActivity {
+public class ListActivity extends AppCompatActivity {
 
     private static final int HIGHLIGHT_COLOR = 0x999be6ff;
 
