@@ -23,6 +23,7 @@ public class TextDrawable extends ShapeDrawable {
     private final int fontSize;
     private final float radius;
     private final int borderThickness;
+    private final int borderColor;
 
     private TextDrawable(Builder builder) {
         super(builder.shape);
@@ -50,8 +51,9 @@ public class TextDrawable extends ShapeDrawable {
 
         // border paint settings
         borderThickness = builder.borderThickness;
+        borderColor = builder.borderColor;
         borderPaint = new Paint();
-        borderPaint.setColor(getDarkerShade(color));
+        borderPaint.setColor(borderColor == -1 ? getDarkerShade(color) : borderColor);
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(borderThickness);
 
@@ -144,6 +146,8 @@ public class TextDrawable extends ShapeDrawable {
 
         private int borderThickness;
 
+        private int borderColor;
+
         private int width;
 
         private int height;
@@ -167,6 +171,7 @@ public class TextDrawable extends ShapeDrawable {
             color = Color.GRAY;
             textColor = Color.WHITE;
             borderThickness = 0;
+            borderColor = -1;
             width = -1;
             height = -1;
             shape = new RectShape();
@@ -192,7 +197,12 @@ public class TextDrawable extends ShapeDrawable {
         }
 
         public IConfigBuilder withBorder(int thickness) {
+            return withBorder(thickness, this.borderColor);
+        }
+
+        public IConfigBuilder withBorder(int thickness, int color) {
             this.borderThickness = thickness;
+            this.borderColor = color;
             return this;
         }
 
@@ -280,6 +290,8 @@ public class TextDrawable extends ShapeDrawable {
         public IConfigBuilder textColor(int color);
 
         public IConfigBuilder withBorder(int thickness);
+
+        public IConfigBuilder withBorder(int thickness, int color);
 
         public IConfigBuilder useFont(Typeface font);
 

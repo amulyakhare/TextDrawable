@@ -61,7 +61,7 @@ TextDrawable drawable2 = TextDrawable.builder()
 ```java
 TextDrawable drawable = TextDrawable.builder()
                 .beginConfig()
-                    .withBorder(4) /* thickness in px */
+                    .withBorder(4, Color.BLUE) /* thickness in px */
                 .endConfig()
                 .buildRoundRect("A", Color.RED, 10);
 ```
@@ -92,7 +92,7 @@ int color2 = generator.getColor("user@gmail.com")
 // declare the builder object once.
 TextDrawable.IBuilder builder = TextDrawable.builder()
 				.beginConfig()
-					.withBorder(4)
+					.withBorder(4, Color.BLUE)
 				.endConfig()
 				.rect();
 
