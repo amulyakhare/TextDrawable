@@ -86,7 +86,9 @@ public class TextDrawable extends ShapeDrawable {
         int height = this.height < 0 ? r.height() : this.height;
         int fontSize = this.fontSize < 0 ? (Math.min(width, height) / 2) : this.fontSize;
         textPaint.setTextSize(fontSize);
-        canvas.drawText(text, width / 2, height / 2 - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
+        Rect textBounds = new Rect();
+        textPaint.getTextBounds(text, 0, text.length(), textBounds);
+        canvas.drawText(text, width / 2, height / 2 - textBounds.exactCenterY(), textPaint);
 
         canvas.restoreToCount(count);
 
