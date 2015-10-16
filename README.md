@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.afollestad:TextDrawable:4a4892e92c'
+    compile 'com.afollestad:TextDrawable:8aa467a17d'
 }
 ```
 
