@@ -30,7 +30,7 @@ Add this to your module's `build.gradle` file:
 ```gradle
 dependencies {
 	...
-	compile('com.github.afollestad:TextDrawable:2056912283') {
+	compile('com.github.afollestad:TextDrawable:c32bc48d86') {
 		transitive = true
 	}
 }
