@@ -5,20 +5,40 @@ This light-weight library provides images with letter/text like the Gmail app. I
 <img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen2-material.png" width="350"/>
 </p>
 
-###How to use
+# Gradle Dependency
 
-#### Import with Gradle:
+[![Release](https://jitpack.io/v/afollestad/TextDrawable.svg)](https://jitpack.io/#afollestad/TextDrawable)
+[![Build Status](https://travis-ci.org/afollestad/TextDrawable.svg)](https://travis-ci.org/afollestad/TextDrawable)
 
-```groovy
-repositories {
-    // ...
-    maven { url "https://jitpack.io" }
-}
+#### Repository
 
-dependencies {
-    compile 'com.afollestad:TextDrawable:8aa467a17d'
+Add this in your root `build.gradle` file (**not** your module `build.gradle` file):
+
+```gradle
+allprojects {
+	repositories {
+		...
+		maven { url "https://jitpack.io" }
+	}
 }
 ```
+
+#### Dependency
+
+Add this to your module's `build.gradle` file:
+
+```gradle
+dependencies {
+	...
+	compile('com.github.afollestad:TextDrawable:2056912283') {
+		transitive = true
+	}
+}
+```
+
+---
+
+### How to use
 
 ####1. Create simple tile:
 
