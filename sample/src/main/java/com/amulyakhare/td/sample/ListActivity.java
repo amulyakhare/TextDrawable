@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,7 +20,7 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import java.util.Arrays;
 import java.util.List;
 
-public class ListActivity extends ActionBarActivity {
+public class ListActivity extends AppCompatActivity {
 
     private static final int HIGHLIGHT_COLOR = 0x999be6ff;
 
@@ -58,33 +59,33 @@ public class ListActivity extends ActionBarActivity {
         // initialize the builder based on the "TYPE"
         switch (type) {
             case DrawableProvider.SAMPLE_RECT:
-                mDrawableBuilder = TextDrawable.builder()
+                mDrawableBuilder = TextDrawable.builder(this)
                         .rect();
                 break;
             case DrawableProvider.SAMPLE_ROUND_RECT:
-                mDrawableBuilder = TextDrawable.builder()
+                mDrawableBuilder = TextDrawable.builder(this)
                         .roundRect(10);
                 break;
             case DrawableProvider.SAMPLE_ROUND:
-                mDrawableBuilder = TextDrawable.builder()
+                mDrawableBuilder = TextDrawable.builder(this)
                         .round();
                 break;
             case DrawableProvider.SAMPLE_RECT_BORDER:
-                mDrawableBuilder = TextDrawable.builder()
+                mDrawableBuilder = TextDrawable.builder(this)
                         .beginConfig()
                             .withBorder(4)
                         .endConfig()
                         .rect();
                 break;
             case DrawableProvider.SAMPLE_ROUND_RECT_BORDER:
-                mDrawableBuilder = TextDrawable.builder()
+                mDrawableBuilder = TextDrawable.builder(this)
                         .beginConfig()
                             .withBorder(4)
                         .endConfig()
                         .roundRect(10);
                 break;
             case DrawableProvider.SAMPLE_ROUND_BORDER:
-                mDrawableBuilder = TextDrawable.builder()
+                mDrawableBuilder = TextDrawable.builder(this)
                         .beginConfig()
                             .withBorder(4)
                         .endConfig()

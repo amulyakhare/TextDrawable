@@ -40,22 +40,22 @@ public class DrawableProvider {
     }
 
     public TextDrawable getRect(String text) {
-        return TextDrawable.builder()
+        return TextDrawable.builder(mContext)
                 .buildRect(text, mGenerator.getColor(text));
     }
 
     public TextDrawable getRound(String text) {
-        return TextDrawable.builder()
+        return TextDrawable.builder(mContext)
                 .buildRound(text, mGenerator.getColor(text));
     }
 
     public TextDrawable getRoundRect(String text) {
-        return TextDrawable.builder()
+        return TextDrawable.builder(mContext)
                 .buildRoundRect(text, mGenerator.getColor(text), toPx(10));
     }
 
     public TextDrawable getRectWithBorder(String text) {
-        return TextDrawable.builder()
+        return TextDrawable.builder(mContext)
                 .beginConfig()
                     .withBorder(toPx(2))
                 .endConfig()
@@ -63,7 +63,7 @@ public class DrawableProvider {
     }
 
     public TextDrawable getRoundWithBorder(String text) {
-        return TextDrawable.builder()
+        return TextDrawable.builder(mContext)
                 .beginConfig()
                     .withBorder(toPx(2))
                 .endConfig()
@@ -71,7 +71,7 @@ public class DrawableProvider {
     }
 
     public TextDrawable getRoundRectWithBorder(String text) {
-        return TextDrawable.builder()
+        return TextDrawable.builder(mContext)
                 .beginConfig()
                     .withBorder(toPx(2))
                 .endConfig()
@@ -80,7 +80,7 @@ public class DrawableProvider {
 
     public TextDrawable getRectWithMultiLetter() {
         String text = "AK";
-        return TextDrawable.builder()
+        return TextDrawable.builder(mContext)
                 .beginConfig()
                     .fontSize(toPx(20))
                     .toUpperCase()
@@ -90,7 +90,7 @@ public class DrawableProvider {
 
     public TextDrawable getRoundWithCustomFont() {
         String text = "Bold";
-        return TextDrawable.builder()
+        return TextDrawable.builder(mContext)
                 .beginConfig()
                     .useFont(Typeface.DEFAULT)
                     .fontSize(toPx(15))
@@ -104,7 +104,7 @@ public class DrawableProvider {
         String leftText = "I";
         String rightText = "J";
 
-        TextDrawable.IBuilder builder = TextDrawable.builder()
+        TextDrawable.IBuilder builder = TextDrawable.builder(mContext)
                 .beginConfig()
                     .width(toPx(29))
                     .withBorder(toPx(2))
@@ -125,7 +125,7 @@ public class DrawableProvider {
     }
 
     public Drawable getRectWithAnimation() {
-        TextDrawable.IBuilder builder = TextDrawable.builder()
+        TextDrawable.IBuilder builder = TextDrawable.builder(mContext)
                 .rect();
 
         AnimationDrawable animationDrawable = new AnimationDrawable();
