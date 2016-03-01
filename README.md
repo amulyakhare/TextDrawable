@@ -5,6 +5,11 @@ This light-weight library provides images with letter/text like the Gmail app. I
 <img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen2-material.png" width="350"/>
 </p>
 
+  **  Here is the c# implementation of [TextDrwable](https://github.com/jagadeesh1492/Android-Ui),you can install it nuget package manager **
+
+  ** Nuget **
+  ` Install-Package Android.Ui.TextDrawable`
+
 ###How to use
 
 #### Import with Gradle:
