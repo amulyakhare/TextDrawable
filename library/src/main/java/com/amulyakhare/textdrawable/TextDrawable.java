@@ -137,29 +137,18 @@ public class TextDrawable extends ShapeDrawable {
     }
 
     public static class Builder implements IConfigBuilder, IShapeBuilder, IBuilder {
-
-        private String text;
-
-        private int color;
-
-        private int borderThickness;
-
-        private int width;
-
-        private int height;
-
-        private Typeface font;
-
-        private RectShape shape;
-
+        private static final RectF EMPTY_RECT = new RectF();
         public int textColor;
-
+        private String text;
+        private int color;
+        private int borderThickness;
+        private int width;
+        private int height;
+        private Typeface font;
+        private RectShape shape;
         private int fontSize;
-
         private boolean isBold;
-
         private boolean toUpperCase;
-
         public float radius;
 
         private Builder() {
@@ -242,7 +231,7 @@ public class TextDrawable extends ShapeDrawable {
         public IBuilder roundRect(int radius) {
             this.radius = radius;
             float[] radii = {radius, radius, radius, radius, radius, radius, radius, radius};
-            this.shape = new RoundRectShape(radii, null, null);
+            this.shape = new RoundRectShape(radii, EMPTY_RECT, null);
             return this;
         }
 
