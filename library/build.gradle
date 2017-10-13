@@ -1,14 +1,17 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.RocketChat'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    compileSdkVersion 26
+    buildToolsVersion '25.0.3'
 
     defaultConfig {
         minSdkVersion 10
-        targetSdkVersion 21
+        targetSdkVersion 26
         versionCode 2
-        versionName "1.1"
+        versionName "1.2"
     }
     buildTypes {
         release {
