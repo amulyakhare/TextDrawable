@@ -23,6 +23,7 @@ public class TextDrawable extends ShapeDrawable {
     private final int fontSize;
     private final float radius;
     private final int borderThickness;
+    private final int borderColor;
 
     private TextDrawable(Builder builder) {
         super(builder.shape);
@@ -50,10 +51,17 @@ public class TextDrawable extends ShapeDrawable {
 
         // border paint settings
         borderThickness = builder.borderThickness;
+        borderColor = builder.borderColor;
         borderPaint = new Paint();
-        borderPaint.setColor(getDarkerShade(color));
+        if (borderColor == 0)
+            borderPaint.setColor(getDarkerShade(color));
+        else {
+            borderPaint.setColor(getDarkerShade(borderColor));
+        }
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(borderThickness);
+        borderPaint.setAntiAlias(true);
+
 
         // drawable paint color
         Paint paint = getPaint();
@@ -144,6 +152,8 @@ public class TextDrawable extends ShapeDrawable {
 
         private int borderThickness;
 
+        private int borderColor;
+
         private int width;
 
         private int height;
@@ -167,6 +177,7 @@ public class TextDrawable extends ShapeDrawable {
             color = Color.GRAY;
             textColor = Color.WHITE;
             borderThickness = 0;
+            borderColor = 0;
             width = -1;
             height = -1;
             shape = new RectShape();
@@ -192,6 +203,12 @@ public class TextDrawable extends ShapeDrawable {
         }
 
         public IConfigBuilder withBorder(int thickness) {
+            this.borderThickness = thickness;
+            return this;
+        }
+
+        public IConfigBuilder withBorder(int thickness, int color) {
+            this.borderColor = color;
             this.borderThickness = thickness;
             return this;
         }
@@ -278,6 +295,8 @@ public class TextDrawable extends ShapeDrawable {
         public IConfigBuilder height(int height);
 
         public IConfigBuilder textColor(int color);
+
+        public IConfigBuilder withBorder(int thickness, int color);
 
         public IConfigBuilder withBorder(int thickness);
 
