@@ -12,12 +12,12 @@ This light-weight library provides images with letter/text like the Gmail app. I
 ```groovy
 repositories{
     maven {
-        url 'http://dl.bintray.com/amulyakhare/maven'
+        url 'https://jitpack.io'
     }
 }
 
 dependencies {
-    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    compile 'com.github.ramseth001:TextDrawable:1.0.0'
 }
 ```
 
