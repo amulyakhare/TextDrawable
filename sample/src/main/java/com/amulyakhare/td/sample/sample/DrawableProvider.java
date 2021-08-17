@@ -35,7 +35,7 @@ public class DrawableProvider {
     private final Context mContext;
 
     public DrawableProvider(Context context) {
-        mGenerator = ColorGenerator.DEFAULT;
+        mGenerator = ColorGenerator.Companion.getDEFAULT();
         mContext = context;
     }
 

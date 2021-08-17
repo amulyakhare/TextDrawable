@@ -45,7 +45,7 @@ public class ListActivity extends AppCompatActivity {
     );
 
     // declare the color generator and drawable builder
-    private ColorGenerator mColorGenerator = ColorGenerator.MATERIAL;
+    private final ColorGenerator mColorGenerator = ColorGenerator.Companion.getMATERIAL();
     private TextDrawable.IBuilder mDrawableBuilder;
 
     @Override
@@ -94,7 +94,7 @@ public class ListActivity extends AppCompatActivity {
         }
 
         // init the list view and its adapter
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = findViewById(R.id.listView);
         listView.setAdapter(new SampleAdapter());
     }
 
@@ -161,19 +161,19 @@ public class ListActivity extends AppCompatActivity {
 
     private static class ViewHolder {
 
-        private View view;
+        private final View view;
 
-        private ImageView imageView;
+        private final ImageView imageView;
 
-        private TextView textView;
+        private final TextView textView;
 
-        private ImageView checkIcon;
+        private final ImageView checkIcon;
 
         private ViewHolder(View view) {
             this.view = view;
-            imageView = (ImageView) view.findViewById(R.id.imageView);
-            textView = (TextView) view.findViewById(R.id.textView);
-            checkIcon = (ImageView) view.findViewById(R.id.check_icon);
+            imageView = view.findViewById(R.id.imageView);
+            textView = view.findViewById(R.id.textView);
+            checkIcon = view.findViewById(R.id.check_icon);
         }
     }
 
