@@ -25,7 +25,7 @@ public class ListActivity extends AppCompatActivity {
     private static final int HIGHLIGHT_COLOR = 0x999be6ff;
 
     // list of data items
-    private List<ListData> mDataList = Arrays.asList(
+    private final List<ListData> mDataList = Arrays.asList(
             new ListData("Iron Man"),
             new ListData("Captain America"),
             new ListData("James Bond"),
@@ -179,7 +179,7 @@ public class ListActivity extends AppCompatActivity {
 
     private static class ListData {
 
-        private String data;
+        private final String data;
 
         private boolean isChecked;
 

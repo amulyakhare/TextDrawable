@@ -8,11 +8,11 @@ import android.graphics.drawable.Drawable;
  */
 public class DataItem {
 
-    private String label;
+    private final String label;
 
-    private Drawable drawable;
+    private final Drawable drawable;
 
-    private int navigationInfo;
+    private final int navigationInfo;
 
     public DataItem(String label, Drawable drawable, int navigationInfo) {
         this.label = label;

@@ -18,7 +18,7 @@ public class DataSource {
 
     public DataSource(Context context) {
         mProvider = new DrawableProvider(context);
-        mDataSource = new ArrayList<DataItem>();
+        mDataSource = new ArrayList<>();
         mDataSource.add(itemFromType(DrawableProvider.SAMPLE_RECT));
         mDataSource.add(itemFromType(DrawableProvider.SAMPLE_ROUND_RECT));
         mDataSource.add(itemFromType(DrawableProvider.SAMPLE_ROUND));

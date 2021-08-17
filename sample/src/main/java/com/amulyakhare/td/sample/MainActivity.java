@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mListView = (ListView) findViewById(R.id.listView);
+        mListView = findViewById(R.id.listView);
         mDataSource = new DataSource(this);
         mListView.setAdapter(new SampleAdapter());
         mListView.setOnItemClickListener(this);
@@ -108,13 +108,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private static class ViewHolder {
 
-        private ImageView imageView;
-
-        private TextView textView;
+        private final ImageView imageView;
+        private final TextView textView;
 
         private ViewHolder(View view) {
-            imageView = (ImageView) view.findViewById(R.id.imageView);
-            textView = (TextView) view.findViewById(R.id.textView);
+            imageView = view.findViewById(R.id.imageView);
+            textView = view.findViewById(R.id.textView);
         }
     }
 }
