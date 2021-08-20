@@ -1,11 +1,13 @@
-###TextDrawable 
+[![](https://jitpack.io/v/ramseth001/TextDrawable.svg)](https://jitpack.io/#ramseth001/TextDrawable)
+
+### TextDrawable 
 This light-weight library provides images with letter/text like the Gmail app. It extends the `Drawable` class thus can be used with existing/custom/network `ImageView` classes. Also included is a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) for creating drawables and a customizable `ColorGenerator`.
 
 <p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen1-material.png" width="350"/>
 <img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen2-material.png" width="350"/>
 </p>
 
-###How to use
+### How to use
 
 #### Import with Gradle:
 
@@ -17,11 +19,11 @@ repositories{
 }
 
 dependencies {
-    compile 'com.github.ramseth001:TextDrawable:1.0.0'
+    compile 'com.github.ramseth001:TextDrawable:1.1.3'
 }
 ```
 
-####1. Create simple tile:
+#### 1. Create simple tile:
 
 <p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen3.png"/>
 </p>
@@ -40,7 +42,7 @@ ImageView image = (ImageView) findViewById(R.id.image_view);
 image.setImageDrawable(drawable);
 ```
 
-####2. Create rounded corner or circular tiles:
+#### 2. Create rounded corner or circular tiles:
 
 <p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen6.png"/>
 </p>
@@ -53,7 +55,7 @@ TextDrawable drawable2 = TextDrawable.builder()
                 .buildRound("A", Color.RED);
 ```
 
-####3. Add border:
+#### 3. Add border:
 
 <p align="center"><img src ="https://github.com/amulyakhare/TextDrawable/blob/master/screens/screen5.png"/>
 </p>
@@ -66,7 +68,7 @@ TextDrawable drawable = TextDrawable.builder()
                 .buildRoundRect("A", Color.RED, 10);
 ```
 
-####4. Modify font style:
+#### 4. Modify font style:
 
 ```java
 TextDrawable drawable = TextDrawable.builder()
@@ -80,7 +82,7 @@ TextDrawable drawable = TextDrawable.builder()
                 .buildRect("a", Color.RED)
 ```
 
-####5. Built-in color generator:
+#### 5. Built-in color generator:
 
 ```java
 ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
@@ -101,7 +103,7 @@ TextDrawable ic1 = builder.build("A", color1);
 TextDrawable ic2 = builder.build("B", color2);
 ``` 
 
-####6. Specify the width / height:
+#### 6. Specify the width / height:
 
 ```xml
 <ImageView android:layout_width="wrap_content"
@@ -122,7 +124,7 @@ ImageView image = (ImageView) findViewById(R.id.image_view);
 image.setImageDrawable(drawable);
 ```
 
-####7. Other features:
+#### 7. Other features:
 
 1. Mix-match with other drawables. Use it in conjunction with `LayerDrawable`, `InsetDrawable`, `AnimationDrawable`, `TransitionDrawable` etc.
 
